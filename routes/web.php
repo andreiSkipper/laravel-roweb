@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => 'dashboard', 'uses' => 'HomeController@index']);
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::any('{query}', function() { return redirect('/'); })->where('query', '.*');
