@@ -14,6 +14,8 @@
                         </div>
                     @endif
 
+                    <img src="{{ Gravatar::get(Auth::user()->email) }}">
+
                     You are logged in!
                 </div>
             </div>

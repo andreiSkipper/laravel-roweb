@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -35,5 +36,27 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return void
+     */
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request,
+        // validators
+            [
+                $this->username() => 'required|string',
+                'password' => 'required|string',
+                'g-recaptcha-response' => 'required|captcha'
+            ],
+        // custom messages
+            [
+                'g-recaptcha-response.required' => "You are a robot! Shooo, we don't need you on this app."
+            ]
+        );
     }
 }
