@@ -5,7 +5,18 @@
 .navbar-avatar{
     max-height: 21px;
     width: auto;
-    border-radius: 25%;
+    border-radius: 50%;
+    border: solid 1px;
+    border-color: orange;
+    background-color: white;
+}
+
+.profile-avatar{
+    border-radius: 50%;
+    border: solid 3px;
+    border-color: orange;
+    background-color: white;
+
 }
 
 .g-recaptcha div:first-child {

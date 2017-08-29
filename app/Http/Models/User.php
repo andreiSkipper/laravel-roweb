@@ -4,6 +4,7 @@ namespace App\Http\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Config;
 
 class User extends Authenticatable
 {
@@ -26,4 +27,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function getRoles()
+    {
+        $roles = array_flip(Config::get('constants.roles'));
+
+        return $roles;
+    }
+
+    public function getRole()
+    {
+        return $this->getRoles()[$this->role];
+    }
 }
