@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
 
 class HomeController extends Controller
 {

@@ -2,7 +2,7 @@
  * Created by andrei on 29/08/2017.
  */
 
-.navbar-avatar{
+.navbar-avatar {
     max-height: 21px;
     width: auto;
     border-radius: 50%;
@@ -11,14 +11,19 @@
     background-color: white;
 }
 
-.profile-avatar{
+.profile-avatar {
     border-radius: 50%;
     border: solid 3px;
     border-color: orange;
     background-color: white;
-
+    width: 100%;
+    height: auto;
 }
 
 .g-recaptcha div:first-child {
     margin: auto;
+}
+
+.feed-photo {
+
 }

@@ -13,6 +13,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/site.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('resources/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('resources/font-awesome-4.7.0/animations/font-awesome-animation.min.css') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('bomb-explosion-2.ico') }}">
 </head>
 <body>
@@ -52,7 +54,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">
-                                <img src="{{ Gravatar::get(Auth::user()->email) }}" alt="" class="navbar-avatar">
+                                <img src="{{ \App\Http\Models\User::getAvatar() }}" alt="" class="navbar-avatar">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 

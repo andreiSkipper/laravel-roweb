@@ -15,7 +15,7 @@
                         @endif
 
                         <div class="col-md-2 text-center">
-                            <img src="{{ Gravatar::get(Auth::user()->email) }}" alt="" class="profile-avatar">
+                            <img src="{{ \App\Http\Models\User::getAvatar() }}" alt="" class="profile-avatar">
                         </div>
                         <div class="col-md-10">
                             <p>Name: {{ Auth::user()->name }}</p>
@@ -26,5 +26,33 @@
                 </div>
             </div>
         </div>
+        <?php
+        $userFeed = \App\Http\Models\User::getUserFeed();
+        foreach ($userFeed as $post) {
+        ?>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <?= isset($post['story']) ? $post['story'] : '' ?>
+                    </div>
+
+                    <div class="panel-body text-center">
+                        <?php
+                        if(isset($post['attachments'])){
+                        foreach ($post['attachments'] as $attachment) {
+                        ?>
+                        <img src="<?= $attachment['media']['image']['src'] ?>" alt="" class="feed-photo">
+                        <?php
+                        }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+        }
+        ?>
     </div>
 @endsection
