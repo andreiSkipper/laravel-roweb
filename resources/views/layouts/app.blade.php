@@ -14,7 +14,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/site.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('resources/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('resources/font-awesome-4.7.0/animations/font-awesome-animation.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('resources/font-awesome-4.7.0/animations/font-awesome-animation.min.css') }}"
+          rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('css/site.js') }} }}"></script>
     <link rel="shortcut icon" href="{{ asset('bomb-explosion-2.ico') }}">
 </head>
 <body>
@@ -34,6 +36,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset('bomb-explosion-2.ico') }}" class="pull-left">
                     {{ config('app.name', 'Laravel') }}
                 </a>
             </div>
@@ -78,6 +81,13 @@
                                     </form>
                                 </li>
                             </ul>
+                        </li>
+                        <li><a href="{{ route('products') }}" class="faa-parent animated-hover"><span class="fa fa-product-hunt faa-tada"></span> Products</a></li>
+                        <li>
+                            <a href="{{ route('carts') }}" class="faa-parent animated-hover">
+                                <span class="fa fa-shopping-cart faa-horizontal"></span> Cart
+                                <span class="badge badge-notify" id="cart-badge"><?= \App\Http\Models\Carts::getProductsInCartCount() ?></span>
+                            </a>
                         </li>
                     @endif
                 </ul>

@@ -24,6 +24,26 @@
     margin: auto;
 }
 
-.feed-photo {
+h1 {
+    margin-top: 0;
+}
 
+.badge-notify {
+    background: red;
+    position: absolute;
+    margin: 12px 0;
+    border-radius: 3px;
+    font-size: 10px;
+}
+
+@media (max-width: 768px) {
+    .cart-add {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+.navbar-brand img {
+    height: 100%;
+    width: auto;
 }

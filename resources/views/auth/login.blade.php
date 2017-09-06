@@ -24,13 +24,12 @@
                                         <input id="email" type="email" class="form-control" name="email"
                                                placeholder="E-mail Address"
                                                value="{{ old('email') }}" required autofocus>
-
-                                        @if ($errors->has('email'))
-                                            <span class="help-block">
+                                    </div>
+                                    @if ($errors->has('email'))
+                                        <span class="help-block text-center">
                                                 <strong>{{ $errors->first('email') }}</strong>
                                             </span>
-                                        @endif
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -42,13 +41,12 @@
                                         </span>
                                         <input id="password" type="password" class="form-control" name="password"
                                                placeholder="Password" required>
-
-                                        @if ($errors->has('password'))
-                                            <span class="help-block">
+                                    </div>
+                                    @if ($errors->has('password'))
+                                        <span class="help-block text-center">
                                                 <strong>{{ $errors->first('password') }}</strong>
                                             </span>
-                                        @endif
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
 

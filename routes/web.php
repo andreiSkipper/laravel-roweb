@@ -15,9 +15,21 @@ Route::get('/', ['as' => 'dashboard', 'uses' => 'HomeController@index']);
 
 Auth::routes();
 
+Route::group(['middleware' => 'auth'], function () {
+    // products
+    Route::get('/products', ['as' => 'products', 'uses' => 'ProductsController@index']);
+    Route::get('/products-delete/{id}', ['as' => 'products-delete', 'uses' => 'ProductsController@delete']);
+    Route::match(['post', 'get'], '/products-edit/{id}', ['as' => 'products-edit', 'uses' => 'ProductsController@update']);
+
+    // carts
+    Route::get('/carts', ['as' => 'carts', 'uses' => 'CartsController@index']);
+    Route::get('/carts-delete/{id}', ['as' => 'carts-delete', 'uses' => 'CartsController@delete']);
+    Route::match(['post', 'get'], '/carts-edit/{id}', ['as' => 'carts-edit', 'uses' => 'CartsController@update']);
+    Route::post('/carts-add', ['as' => 'carts-add', 'uses' => 'CartsController@create']);
+});
+
 // Generate a login URL
-Route::get('/facebook/login', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
-{
+Route::get('/facebook/login', function (SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb) {
     // Send an array of permissions to request
     $login_url = $fb->getLoginUrl(Config::get('constants.facebook_permissions'));
 
@@ -26,8 +38,7 @@ Route::get('/facebook/login', function(SammyK\LaravelFacebookSdk\LaravelFacebook
 });
 
 // Endpoint that is redirected to after an authentication attempt
-Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
-{
+Route::get('/facebook/callback', function (SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb) {
     // Obtain an access token.
     try {
         $token = $fb->getAccessTokenFromRedirect();
@@ -37,11 +48,11 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
 
     // Access token will be null if the user denied the request
     // or if someone just hit this URL outside of the OAuth flow.
-    if (! $token) {
+    if (!$token) {
         // Get the redirect helper
         $helper = $fb->getRedirectLoginHelper();
 
-        if (! $helper->getError()) {
+        if (!$helper->getError()) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -54,7 +65,7 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
         );
     }
 
-    if (! $token->isLongLived()) {
+    if (!$token->isLongLived()) {
         // OAuth 2.0 client handler
         $oauth_client = $fb->getOAuth2Client();
 
@@ -69,7 +80,7 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
     $fb->setDefaultAccessToken($token);
 
     // Save for later
-    Session::put('fb_user_access_token', (string) $token);
+    Session::put('fb_user_access_token', (string)$token);
 
     // Get basic info on the user from Facebook.
     try {
@@ -89,4 +100,6 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
     return redirect('/')->with('message', 'Successfully logged in with Facebook');
 });
 
-Route::any('{query}', function() { return redirect('/'); })->where('query', '.*');
+Route::any('{query}', function () {
+    return redirect('/');
+})->where('query', '.*');
