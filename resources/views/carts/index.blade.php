@@ -39,7 +39,7 @@
                                     <label>Cantity:</label>
                                     <select class="form-control" name="cantity" id="cantity">
                                         <?php
-                                        for ($i = 1; $i <= 10; $i++){
+                                        for ($i = 1; $i <= 50; $i++){
                                         ?>
                                         <option value="<?= $i ?>" <?= $cart->cantity == $i ? 'selected' : '' ?>><?= $i ?></option>
                                         <?php
